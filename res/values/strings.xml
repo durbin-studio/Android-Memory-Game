@@ -4,5 +4,7 @@
     <string name="app_name">memorygame</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_new_game">New game</string>
+    <string name="grid_item_description">Grid item</string>
 
 </resources>
