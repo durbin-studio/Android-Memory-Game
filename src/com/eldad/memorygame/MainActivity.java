@@ -1,15 +1,11 @@
 package com.eldad.memorygame;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 

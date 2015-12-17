@@ -6,6 +6,7 @@ import java.util.Random;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainFragment extends Fragment implements IHaveSetup {
 	
@@ -23,6 +23,9 @@ public class MainFragment extends Fragment implements IHaveSetup {
 	private GridView _gridView;
 	private ImageViewAdapter _arrayAdapter;
 	private ArrayList<Integer> _arrayList;
+	private MemoryGameEngine _engine;
+
+	private Handler _handler;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +40,10 @@ public class MainFragment extends Fragment implements IHaveSetup {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
+		_engine = new MemoryGameEngine();
 		Setup();
+		
+		_handler = new Handler();
 	}
 
 	@Override
@@ -46,59 +52,75 @@ public class MainFragment extends Fragment implements IHaveSetup {
 		_gridView.setNumColumns(ColumnCount);
 		
 		_arrayList = new ArrayList<Integer>();
-		PopulateList();
-		ShuffleList();
+		_arrayList.addAll(_engine.GetCardsImageReference());
 		
 		_arrayAdapter = new ImageViewAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, _arrayList);
 		_gridView.setAdapter(_arrayAdapter);
 		
 		_gridView.setOnItemClickListener(new OnItemClickListener() {
 
+			private ImageView _firstImageView;
+			private ImageView _secondImageView;
+
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				ImageView imageView = (ImageView)arg1;
-				if (imageView != null){
-					imageView.setImageResource(_arrayList.get(arg2));
-				}
+
+				final ImageView imageView = (ImageView)arg1;
+				final Integer cardInteger = _arrayList.get(arg2);
+				
+				Runnable runnableOffMain = new Runnable(){
+
+					@Override
+					public void run() {
+						if (imageView != null){
+							
+							_handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									imageView.setImageResource(cardInteger);
+								}
+							});
+							
+							if (_engine.IsFirstCardFlipped() == false){
+								
+								_engine.SetFirstCardVisible(cardInteger);
+								_firstImageView = imageView;
+							}
+							else{
+								
+								_engine.SetSecondCardVisible(cardInteger);
+								_secondImageView = imageView;
+								
+								if (_engine.ValidateTwoCardAerSame()){
+
+									_engine.ResetCards();
+									return;
+								}
+								else{
+
+									try {
+										Thread.sleep(500);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+									_engine.ResetCards();
+									
+									_handler.post(new Runnable() {
+										
+										@Override
+										public void run() {
+											_firstImageView.setImageResource(R.drawable.uncovered);
+											_secondImageView.setImageResource(R.drawable.uncovered);
+										}
+									});
+								}
+							}
+						}
+					}
+				};
+				new Thread(runnableOffMain).start();
 			}
 		});
 	}
-
-	private void ShuffleList() {
-		// TODO Auto-generated method stub
-		Collections.shuffle(_arrayList, new Random(System.nanoTime()));
-		Collections.shuffle(_arrayList, new Random(System.nanoTime()));
-		Collections.shuffle(_arrayList, new Random(System.nanoTime()));
-	}
-
-	private void PopulateList() {
-		_arrayList.add(R.drawable.ball);
-		_arrayList.add(R.drawable.ball);
-
-		_arrayList.add(R.drawable.boat);
-		_arrayList.add(R.drawable.boat);
-		
-		_arrayList.add(R.drawable.castle);
-		_arrayList.add(R.drawable.castle);
-
-		_arrayList.add(R.drawable.crab);
-		_arrayList.add(R.drawable.crab);
-		
-		_arrayList.add(R.drawable.fish);
-		_arrayList.add(R.drawable.fish);
-
-		_arrayList.add(R.drawable.kite);
-		_arrayList.add(R.drawable.kite);
-		
-		_arrayList.add(R.drawable.rocket);
-		_arrayList.add(R.drawable.rocket);
-
-		_arrayList.add(R.drawable.slippers);
-		_arrayList.add(R.drawable.slippers);
-
-		_arrayList.add(R.drawable.star);
-		_arrayList.add(R.drawable.star);
-	}
-
 }
