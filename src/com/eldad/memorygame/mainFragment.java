@@ -1,9 +1,6 @@
 package com.eldad.memorygame;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
