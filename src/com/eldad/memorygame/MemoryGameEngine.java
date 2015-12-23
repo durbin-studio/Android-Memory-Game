@@ -2,25 +2,17 @@ package com.eldad.memorygame;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import android.widget.ImageView;
 
 public class MemoryGameEngine {
 
 	private static MemoryGameEngine _instance;
-	
-	private Map<ImageView, GameCard> _mapping = new HashMap<ImageView, GameCard>();
 	private Integer _firstCard;
 	private Integer _secondCard;
-	
+
 	public static MemoryGameEngine GetInstance() {
-		
-		if (_instance == null){
+		if (_instance == null)
 			_instance = new MemoryGameEngine();
-		}
 		return _instance;
 	}
 	
@@ -30,6 +22,7 @@ public class MemoryGameEngine {
 	}
 
 	public void CheckWinState() {
+		
 		
 	}
 

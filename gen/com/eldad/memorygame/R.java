@@ -34,23 +34,26 @@ public final class R {
         public static final int rocket=0x7f020009;
         public static final int slippers=0x7f02000a;
         public static final int star=0x7f02000b;
+        public static final int uncovered=0x7f02000c;
     }
     public static final class id {
-        public static final int action_new_game=0x7f080006;
+        public static final int action_new_game=0x7f080007;
         public static final int container=0x7f080001;
-        public static final int gridItemCovered=0x7f080003;
-        public static final int gridItemUncovered=0x7f080004;
+        public static final int gridItem=0x7f080003;
+        public static final int gridItemCovered=0x7f080004;
+        public static final int gridItemUncovered=0x7f080005;
         public static final int mainFragmentPlaceHolder=0x7f080000;
-        public static final int mainGridView=0x7f080005;
+        public static final int mainGridView=0x7f080006;
         public static final int notelist=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int card_frame_layout=0x7f030001;
-        public static final int grid_item_covered=0x7f030002;
-        public static final int grid_item_uncovered=0x7f030003;
-        public static final int main_fragment=0x7f030004;
-        public static final int top_bar_fragment=0x7f030005;
+        public static final int grid_item=0x7f030002;
+        public static final int grid_item_covered=0x7f030003;
+        public static final int grid_item_uncovered=0x7f030004;
+        public static final int main_fragment=0x7f030005;
+        public static final int top_bar_fragment=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f070000;
