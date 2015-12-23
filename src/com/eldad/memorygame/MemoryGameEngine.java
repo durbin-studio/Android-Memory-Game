@@ -99,7 +99,7 @@ public class MemoryGameEngine {
 		final float centerY = secondImage.getHeight() / 2.0f;
 		
 		Flip3dAnimation rotation = new Flip3dAnimation(0, 90, centerX, centerY);
-		rotation.setDuration(300);
+		rotation.setDuration(500);
 		rotation.setFillAfter(true);
 		rotation.setInterpolator(new AccelerateInterpolator());
 		rotation.setAnimationListener(new DisplayNextView(imageToRotate, swapView));
