@@ -30,10 +30,9 @@ public final class R {
         public static final int fish=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int kite=0x7f020007;
-        public static final int list_icon=0x7f020008;
-        public static final int rocket=0x7f020009;
-        public static final int slippers=0x7f02000a;
-        public static final int star=0x7f02000b;
+        public static final int rocket=0x7f020008;
+        public static final int slippers=0x7f020009;
+        public static final int star=0x7f02000a;
     }
     public static final class id {
         public static final int action_new_game=0x7f080006;
