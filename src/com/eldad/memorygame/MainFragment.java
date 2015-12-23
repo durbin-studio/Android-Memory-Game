@@ -107,8 +107,8 @@ public class MainFragment extends Fragment implements IHaveSetup {
 										
 										@Override
 										public void run() {
-											_firstImageView.setImageResource(R.drawable.uncovered);
-											_secondImageView.setImageResource(R.drawable.uncovered);
+											_firstImageView.setImageResource(R.drawable.covered);
+											_secondImageView.setImageResource(R.drawable.covered);
 										}
 									});
 								}

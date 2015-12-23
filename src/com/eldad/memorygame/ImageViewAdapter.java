@@ -26,12 +26,12 @@ public class ImageViewAdapter extends ArrayAdapter<Integer> {
 		
 		if (view == null){
 			LayoutInflater vi = LayoutInflater.from(getContext());
-			view = vi.inflate(R.layout.grid_item, parent, false);
+			view = vi.inflate(R.layout.card_frame_layout, parent, false);
 		}
 		
-		ImageView imageView = (ImageView)view.findViewById(R.id.gridItem);
+		ImageView imageView = (ImageView)view.findViewById(R.id.gridItemUncovered);
 		
-		imageView.setImageResource(R.drawable.uncovered);
+		imageView.setImageResource(R.drawable.covered);
 		SetHeightForImageView(imageView);
 		
 		return view;
