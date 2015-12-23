@@ -9,18 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class ImageViewAdapter extends ArrayAdapter<Integer> {
 
 	public ImageViewAdapter(Context context, int resource, List<Integer> items) {
 		super(context, resource, items);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		
 		View view = convertView;
 		
@@ -29,7 +28,10 @@ public class ImageViewAdapter extends ArrayAdapter<Integer> {
 			view = vi.inflate(R.layout.card_frame_layout, parent, false);
 		}
 		
-		ImageView imageView = (ImageView)view.findViewById(R.id.gridItemUncovered);
+		if (view instanceof FrameLayout == false)
+			return null;
+		
+		ImageView imageView = (ImageView)((FrameLayout)view).getChildAt(1);
 		
 		imageView.setImageResource(R.drawable.covered);
 		SetHeightForImageView(imageView);
@@ -40,7 +42,7 @@ public class ImageViewAdapter extends ArrayAdapter<Integer> {
 	private void SetHeightForImageView(ImageView _imageView2) {
 		DisplayMetrics metrics = new DisplayMetrics();
 		GetCurrentWindowMetrics(metrics);
-		_imageView2.setMinimumHeight(metrics.heightPixels / (getCount() / MainFragment.ColumnCount));
+		_imageView2.setMinimumHeight((metrics.heightPixels - 30) / (getCount() / MainFragment.ColumnCount));
 	}
 
 	private void GetCurrentWindowMetrics(DisplayMetrics metrics) {

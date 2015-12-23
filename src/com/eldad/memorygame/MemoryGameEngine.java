@@ -2,13 +2,20 @@ package com.eldad.memorygame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 
 public class MemoryGameEngine {
 
 	private static MemoryGameEngine _instance;
-	private Integer _firstCard;
-	private Integer _secondCard;
+	
+	private Map<ImageView, GameCard> _mapping = new HashMap<ImageView, GameCard>();
+
+	private ImageView _imageViewFirstCard;
+	private ImageView _imageViewSecondCard;
 
 	public static MemoryGameEngine GetInstance() {
 		if (_instance == null)
@@ -20,31 +27,72 @@ public class MemoryGameEngine {
 		
 		ResetCards();
 	}
+	
+	public void CreateIfNotExists(ImageView imageViewCovered, ImageView imageViewUnCovered, Integer imageToDisplayResource){
+		
+		if (!_mapping.containsKey(imageViewCovered)){
+			new GameCard(imageViewCovered, imageViewUnCovered, imageToDisplayResource, true);
+		}
+	}
 
 	public void CheckWinState() {
 		
 		
 	}
 
+	public void HideAndResetCards() {
+		CoverOpenCards();
+		ResetCards();
+	}
+
 	public void ResetCards() {
-		_firstCard = -1;
-		_secondCard = -1;
+		_imageViewFirstCard = null;
+		_imageViewSecondCard = null;
+	}
+
+	private void CoverOpenCards() {
+		GameCard firstCard = GetFirstCard();
+		ApplyAnimation(firstCard.GetUnCoveredImage(), firstCard.GetCoveredImage(), firstCard.GetIsCovered());
+		GameCard secondCard = GetSecondCard();
+		ApplyAnimation(secondCard.GetUnCoveredImage(), secondCard.GetCoveredImage(), secondCard.GetIsCovered());
 	}
 	
-	public boolean IsFirstCardFlipped(){
-		return _firstCard != -1;
+	public void SetSecondCard(ImageView imageView) {
+		_imageViewFirstCard = imageView;
+	}
+
+	public void SetFirstCard(ImageView imageView) {
+		_imageViewSecondCard = imageView;
+	}
+
+	public GameCard GetFirstCard() {
+		return _mapping.get(_imageViewFirstCard);
+	}
+
+	public GameCard GetSecondCard() {
+		return _mapping.get(_imageViewSecondCard);
+	}
+
+	public void ApplyAnimation(ImageView imageToRotate, ImageView secondImage, boolean isCoveredImage){
+		
+		final float centerX = imageToRotate.getWidth() / 2.0f;
+		final float centerY = secondImage.getHeight() / 2.0f;
+		
+		Flip3dAnimation rotation = new Flip3dAnimation(0, 90, centerX, centerY);
+		rotation.setDuration(500);
+		rotation.setFillAfter(true);
+		rotation.setInterpolator(new AccelerateInterpolator());
+		rotation.setAnimationListener(new DisplayNextView(imageToRotate, secondImage, isCoveredImage));
+		
+		imageToRotate.startAnimation(rotation);
+	}
+	
+	public boolean IsFirstCardUnCovered(){
+		return GetFirstCard().GetIsCovered();
 	}
 	
 	public boolean ValidateTwoCardAerSame(){
-		return _firstCard.intValue() == _secondCard.intValue();
-	}
-	
-	public void SetFirstCardVisible(Integer cardVisible){
-		_firstCard = cardVisible;
-	}
-
-	public void SetSecondCardVisible(Integer cardVisible){
-		_secondCard = cardVisible;
+		return GetFirstCard().GetCurrentCardImageNumber().intValue() == GetSecondCard().GetCurrentCardImageNumber().intValue();
 	}
 	
 	public List<Integer> GetCardsImageReference(){

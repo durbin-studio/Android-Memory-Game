@@ -7,13 +7,13 @@ import android.view.animation.Transformation;
 
 public class Flip3dAnimation extends Animation {
 
-	private int _fromDegrees;
-	private int _toDegrees;
+	private float _fromDegrees;
+	private float _toDegrees;
 	private float _centerX;
 	private float _centerY;
 	private Camera _camera;
 
-	public Flip3dAnimation(int fromDegrees, int toDegrees, float centerX, float centerY) {
+	public Flip3dAnimation(float fromDegrees, float toDegrees, float centerX, float centerY) {
 		_fromDegrees = fromDegrees;
 		_toDegrees = toDegrees;
 		_centerX = centerX;
