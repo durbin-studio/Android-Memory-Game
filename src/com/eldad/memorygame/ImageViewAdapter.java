@@ -3,13 +3,12 @@ package com.eldad.memorygame;
 import java.util.List;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 public class ImageViewAdapter extends ArrayAdapter<Integer> {
@@ -35,20 +34,13 @@ public class ImageViewAdapter extends ArrayAdapter<Integer> {
 		ImageView imageViewUncovered = (ImageView)((FrameLayout)view).getChildAt(1);
 		
 		imageViewCovered.setImageResource(R.drawable.covered);
-		SetHeightForImageView(imageViewCovered);
-		SetHeightForImageView(imageViewUncovered);
+		SetHeightForImageView(imageViewCovered, (GridView)parent);
+		SetHeightForImageView(imageViewUncovered, (GridView)parent);
 		
 		return view;
 	}
 
-	private void SetHeightForImageView(ImageView _imageView) {
-		DisplayMetrics metrics = new DisplayMetrics();
-		GetCurrentWindowMetrics(metrics);
-		_imageView.setMinimumHeight(metrics.heightPixels / (getCount() / MainFragment.ColumnCount));
-	}
-
-	private void GetCurrentWindowMetrics(DisplayMetrics metrics) {
-		WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-		windowManager.getDefaultDisplay().getMetrics(metrics);
+	private void SetHeightForImageView(ImageView _imageView, GridView parent) {
+		_imageView.setMinimumHeight(parent.getHeight() / (getCount() / MainFragment.ColumnCount));
 	}
 }
