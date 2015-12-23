@@ -31,18 +31,20 @@ public class ImageViewAdapter extends ArrayAdapter<Integer> {
 		if (view instanceof FrameLayout == false)
 			return null;
 		
-		ImageView imageView = (ImageView)((FrameLayout)view).getChildAt(1);
+		ImageView imageViewCovered = (ImageView)((FrameLayout)view).getChildAt(0);
+		ImageView imageViewUncovered = (ImageView)((FrameLayout)view).getChildAt(1);
 		
-		imageView.setImageResource(R.drawable.covered);
-		SetHeightForImageView(imageView);
+		imageViewCovered.setImageResource(R.drawable.covered);
+		SetHeightForImageView(imageViewCovered);
+		SetHeightForImageView(imageViewUncovered);
 		
 		return view;
 	}
 
-	private void SetHeightForImageView(ImageView _imageView2) {
+	private void SetHeightForImageView(ImageView _imageView) {
 		DisplayMetrics metrics = new DisplayMetrics();
 		GetCurrentWindowMetrics(metrics);
-		_imageView2.setMinimumHeight((metrics.heightPixels - 30) / (getCount() / MainFragment.ColumnCount));
+		_imageView.setMinimumHeight(metrics.heightPixels / (getCount() / MainFragment.ColumnCount));
 	}
 
 	private void GetCurrentWindowMetrics(DisplayMetrics metrics) {

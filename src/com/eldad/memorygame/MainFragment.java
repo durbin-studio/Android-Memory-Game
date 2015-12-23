@@ -35,7 +35,7 @@ public class MainFragment extends Fragment implements IHaveSetup {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
-		_engine = new MemoryGameEngine();
+		_engine = MemoryGameEngine.GetInstance();
 		Setup();
 	}
 
@@ -60,10 +60,14 @@ public class MainFragment extends Fragment implements IHaveSetup {
 				ImageView uncovered = (ImageView)container.getChildAt(1);
 				Integer cardInteger = _arrayList.get(arg2);
 				
-				_engine.CreateIfNotExists(covered, uncovered, cardInteger);
+				GameCard gameCard = _engine.CreateIfNotExists(covered, uncovered, cardInteger);
+				if (gameCard.GetIsCovered() == false)
+					return;
 				
+				covered.setVisibility(View.VISIBLE);
 				uncovered.setVisibility(View.GONE);
-				_engine.ApplyAnimation(covered, uncovered, true);
+				
+				_engine.ApplyAnimation(covered, uncovered, true, new SwapView(covered, uncovered, true));
 			}
 		});
 	}

@@ -12,8 +12,7 @@ public class MemoryGameEngine {
 
 	private static MemoryGameEngine _instance;
 	
-	private Map<ImageView, GameCard> _mapping = new HashMap<ImageView, GameCard>();
-
+	private Map<ImageView, GameCard> _mapping;
 	private ImageView _imageViewFirstCard;
 	private ImageView _imageViewSecondCard;
 
@@ -25,19 +24,32 @@ public class MemoryGameEngine {
 	
 	protected MemoryGameEngine() {
 		
+		_mapping = new HashMap<ImageView, GameCard>();
 		ResetCards();
 	}
 	
-	public void CreateIfNotExists(ImageView imageViewCovered, ImageView imageViewUnCovered, Integer imageToDisplayResource){
+	public GameCard CreateIfNotExists(ImageView imageViewCovered, ImageView imageViewUnCovered, Integer imageToDisplayResource){
 		
 		if (!_mapping.containsKey(imageViewCovered)){
-			new GameCard(imageViewCovered, imageViewUnCovered, imageToDisplayResource, true);
+			GameCard gameCard = new GameCard(imageViewCovered, imageViewUnCovered, imageToDisplayResource, true);
+			_mapping.put(imageViewCovered, gameCard);
 		}
+		
+		return _mapping.get(imageViewCovered);
 	}
 
-	public void CheckWinState() {
+	public void CheckIfTwoCardAreSame() {
+		GameCard firstCard = GetFirstCard();
+		GameCard secondCard = GetSecondCard();
 		
+		if (firstCard == null || secondCard == null)
+			return;
 		
+		if (AreTwoCardSame() == false){
+			CoverOpenCards();
+		}
+		ResetCards();
+		return;
 	}
 
 	public void HideAndResetCards() {
@@ -51,17 +63,25 @@ public class MemoryGameEngine {
 	}
 
 	private void CoverOpenCards() {
+		
 		GameCard firstCard = GetFirstCard();
-		ApplyAnimation(firstCard.GetUnCoveredImage(), firstCard.GetCoveredImage(), firstCard.GetIsCovered());
+		ImageView firstCardUncoveredImage = firstCard.GetUnCoveredImage();
+		ImageView firstCardCoveredImage = firstCard.GetCoveredImage();
+		boolean firstCardIsCovered = firstCard.GetIsCovered();
+		ApplyAnimation(firstCard.GetUnCoveredImage(), firstCard.GetCoveredImage(), firstCard.GetIsCovered(), new SwapViewNoListener(firstCardUncoveredImage, firstCardCoveredImage, firstCardIsCovered));
+		
 		GameCard secondCard = GetSecondCard();
-		ApplyAnimation(secondCard.GetUnCoveredImage(), secondCard.GetCoveredImage(), secondCard.GetIsCovered());
-	}
-	
-	public void SetSecondCard(ImageView imageView) {
-		_imageViewFirstCard = imageView;
+		ImageView secondCardUncoveredImage = secondCard.GetUnCoveredImage();
+		ImageView secondCardCoveredImage = secondCard.GetCoveredImage();
+		boolean secondCardIsCovered = secondCard.GetIsCovered();
+		ApplyAnimation(secondCard.GetUnCoveredImage(), secondCard.GetCoveredImage(), secondCard.GetIsCovered(), new SwapViewNoListener(secondCardUncoveredImage, secondCardCoveredImage, secondCardIsCovered));
 	}
 
 	public void SetFirstCard(ImageView imageView) {
+		_imageViewFirstCard = imageView;
+	}
+
+	public void SetSecondCard(ImageView imageView) {
 		_imageViewSecondCard = imageView;
 	}
 
@@ -73,7 +93,7 @@ public class MemoryGameEngine {
 		return _mapping.get(_imageViewSecondCard);
 	}
 
-	public void ApplyAnimation(ImageView imageToRotate, ImageView secondImage, boolean isCoveredImage){
+	public void ApplyAnimation(ImageView imageToRotate, ImageView secondImage, boolean isCoveredImage, SwapView swapView){
 		
 		final float centerX = imageToRotate.getWidth() / 2.0f;
 		final float centerY = secondImage.getHeight() / 2.0f;
@@ -82,16 +102,12 @@ public class MemoryGameEngine {
 		rotation.setDuration(500);
 		rotation.setFillAfter(true);
 		rotation.setInterpolator(new AccelerateInterpolator());
-		rotation.setAnimationListener(new DisplayNextView(imageToRotate, secondImage, isCoveredImage));
+		rotation.setAnimationListener(new DisplayNextView(imageToRotate, swapView));
 		
 		imageToRotate.startAnimation(rotation);
 	}
 	
-	public boolean IsFirstCardUnCovered(){
-		return GetFirstCard().GetIsCovered();
-	}
-	
-	public boolean ValidateTwoCardAerSame(){
+	public boolean AreTwoCardSame(){
 		return GetFirstCard().GetCurrentCardImageNumber().intValue() == GetSecondCard().GetCurrentCardImageNumber().intValue();
 	}
 	

@@ -7,18 +7,16 @@ import android.widget.ImageView;
 public class DisplayNextView implements AnimationListener {
 
 	private ImageView _imageToRotate;
-	private ImageView _secondImage;
-	private boolean _isCoveredImage;
+	private SwapView _swapView;
 
-	public DisplayNextView(ImageView imageToRotate, ImageView secondImage, boolean isCoveredImage) {
+	public DisplayNextView(ImageView imageToRotate, SwapView swapView) {
 		_imageToRotate = imageToRotate;
-		_secondImage = secondImage;
-		_isCoveredImage = isCoveredImage;
+		_swapView = swapView;
 	}
 
 	@Override
 	public void onAnimationEnd(Animation arg0) {
-		_imageToRotate.post(new SwapView(_imageToRotate, _secondImage, _isCoveredImage));
+		_imageToRotate.post(_swapView);
 	}
 
 	@Override

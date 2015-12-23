@@ -8,7 +8,7 @@ public class CheckStateAfterFlip implements AnimationListener {
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		MemoryGameEngine engine = MemoryGameEngine.GetInstance();
-		engine.CheckWinState();
+		engine.CheckIfTwoCardAreSame();
 	}
 
 	@Override
