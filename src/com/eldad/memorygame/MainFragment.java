@@ -55,6 +55,9 @@ public class MainFragment extends Fragment implements IHaveSetup {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
+				if (_engine.GetSecondCard() != null)
+					return;
+				
 				FrameLayout container = (FrameLayout)arg1;
 				ImageView covered = (ImageView)container.getChildAt(0);
 				ImageView uncovered = (ImageView)container.getChildAt(1);
