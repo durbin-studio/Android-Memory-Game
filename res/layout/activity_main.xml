@@ -6,18 +6,18 @@
     android:orientation="vertical"
     tools:context="com.eldad.memorygame.MainActivity" >
 
-    <fragment android:id="@+id/topbarFragmentPlaceHolder"
-        android:name="com.eldad.memorygame.TopBarFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-    
     <fragment android:id="@+id/mainFragmentPlaceHolder"
         android:name="com.eldad.memorygame.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
+        />
+    
+    <fragment android:id="@+id/bottomBarFragmentPlaceHolder"
+        android:name="com.eldad.memorygame.BottomBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         />
 
 </LinearLayout>

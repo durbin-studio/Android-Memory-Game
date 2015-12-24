@@ -4,6 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:src="@drawable/covered"
-    android:padding="15dp"
+    android:padding="5dp"
     android:contentDescription="@string/grid_item_description">
 </ImageView>

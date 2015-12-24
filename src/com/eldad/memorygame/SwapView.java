@@ -38,12 +38,6 @@ public class SwapView implements Runnable {
 		SetAnimationListener(rotation);
 		
 		_secondImage.startAnimation(rotation);
-		
-		MemoryGameEngine engine = MemoryGameEngine.GetInstance();
-		if (engine.GetFirstCard() == null)
-			engine.SetFirstCard(_imageToRotate);
-		else
-			engine.SetSecondCard(_imageToRotate);
 	}
 
 	protected void SetAnimationListener(Flip3dAnimation rotation) {
