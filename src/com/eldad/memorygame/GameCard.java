@@ -9,11 +9,10 @@ public class GameCard {
 	private Integer _currentCardImageNumber;
 	private boolean _isCovered;
 	
-	public GameCard(ImageView coveredImage, ImageView unCoveredImage, Integer currentCardImageNumber, boolean isCovered) {
+	public GameCard(ImageView coveredImage, ImageView unCoveredImage, Integer currentCardImageNumber) {
 		_coveredImage = coveredImage;
 		_unCoveredImage = unCoveredImage;
 		_currentCardImageNumber = currentCardImageNumber;
-		_isCovered = isCovered;
 		
 		_unCoveredImage.setImageResource(_currentCardImageNumber);
 	}
@@ -34,7 +33,7 @@ public class GameCard {
 		return _isCovered;
 	}
 	
-	public void SwitchCoveredState(){
-		_isCovered = !_isCovered;
+	public void SetCoveredUncoveredState(boolean isCovered){
+		_isCovered = isCovered;
 	}
 }

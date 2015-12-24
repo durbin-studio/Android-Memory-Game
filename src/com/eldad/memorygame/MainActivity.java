@@ -1,6 +1,7 @@
 package com.eldad.memorygame;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class MainActivity extends Activity {
+
+	private static Context _context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +21,13 @@ public class MainActivity extends Activity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		setContentView(R.layout.activity_main);
+		_context = getApplicationContext();
 	}
 
+	public static Context GetApplicationContext(){
+		return _context;
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
