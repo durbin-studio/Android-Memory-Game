@@ -32,7 +32,6 @@ public class SwapView implements Runnable {
 		else
 			rotation = new Flip3dAnimation(90, 0, centerX, centerY);
 		
-		rotation.setStartOffset(500);
 		rotation.setDuration(500);
 		rotation.setFillAfter(true);
 		rotation.setInterpolator(new DecelerateInterpolator());
