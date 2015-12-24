@@ -572,7 +572,8 @@ containing a value of this type.
         public static final int star=0x7f02003f;
     }
     public static final class id {
-        public static final int action_new_game=0x7f080031;
+        public static final int action_new_game=0x7f080032;
+        public static final int adView=0x7f08002c;
         public static final int adjust_height=0x7f080007;
         public static final int adjust_width=0x7f080008;
         public static final int android_pay=0x7f080028;
@@ -588,7 +589,7 @@ containing a value of this type.
         public static final int buy_with_google=0x7f08001b;
         public static final int cast_notification_id=0x7f080000;
         public static final int classic=0x7f080022;
-        public static final int container=0x7f08002c;
+        public static final int container=0x7f08002d;
         public static final int dark=0x7f080005;
         public static final int donate_with=0x7f08001c;
         public static final int donate_with_google=0x7f08001d;
@@ -596,8 +597,8 @@ containing a value of this type.
         public static final int google_wallet_grayscale=0x7f080024;
         public static final int google_wallet_monochrome=0x7f080025;
         public static final int grayscale=0x7f080026;
-        public static final int gridItemCovered=0x7f08002e;
-        public static final int gridItemUncovered=0x7f08002f;
+        public static final int gridItemCovered=0x7f08002f;
+        public static final int gridItemUncovered=0x7f080030;
         public static final int holo_dark=0x7f08000e;
         public static final int holo_light=0x7f08000f;
         public static final int hybrid=0x7f08000a;
@@ -605,12 +606,12 @@ containing a value of this type.
         public static final int light=0x7f080006;
         public static final int logo_only=0x7f08001e;
         public static final int mainFragmentPlaceHolder=0x7f08002a;
-        public static final int mainGridView=0x7f080030;
+        public static final int mainGridView=0x7f080031;
         public static final int match_parent=0x7f080016;
         public static final int monochrome=0x7f080027;
         public static final int none=0x7f080009;
         public static final int normal=0x7f08000b;
-        public static final int notelist=0x7f08002d;
+        public static final int notelist=0x7f08002e;
         public static final int production=0x7f080010;
         public static final int sandbox=0x7f080011;
         public static final int satellite=0x7f08000c;
@@ -651,6 +652,7 @@ containing a value of this type.
         /**  Brand name for Google [DO NOT TRANSLATE] 
          */
         public static final int auth_google_play_services_client_google_display_name=0x7f060006;
+        public static final int banner_ad_unit_id=0x7f060031;
         /**  Message of the notification to indicate an active cast display connection.  [CHAR LIMIT=80] NOTE: Same text as msgid="794424023757290105" 
          */
         public static final int cast_notification_connected_message=0x7f06000b;
