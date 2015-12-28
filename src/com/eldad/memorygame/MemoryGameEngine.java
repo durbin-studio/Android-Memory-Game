@@ -36,9 +36,7 @@ public class MemoryGameEngine {
 			_mapping.put(imageViewCovered, gameCard);
 		}
 		
-		GameCard gameCard = _mapping.get(imageViewCovered);
-		gameCard.SetCoveredUncoveredState(true);
-		return gameCard;
+		return _mapping.get(imageViewCovered);
 	}
 
 	private boolean CheckWinState(){
@@ -84,14 +82,14 @@ public class MemoryGameEngine {
 		ImageView firstCardCoveredImage = firstCard.GetCoveredImage();
 		boolean firstCardIsCovered = firstCard.GetIsCovered();
 		ApplyAnimation(firstCard.GetUnCoveredImage(), firstCard.GetCoveredImage(), firstCard.GetIsCovered(), new SwapViewNoListener(firstCardUncoveredImage, firstCardCoveredImage, firstCardIsCovered));
-		firstCard.SetCoveredUncoveredState(true);
+		firstCard.SetCoveredState(true);
 		
 		GameCard secondCard = GetSecondCard();
 		ImageView secondCardUncoveredImage = secondCard.GetUnCoveredImage();
 		ImageView secondCardCoveredImage = secondCard.GetCoveredImage();
 		boolean secondCardIsCovered = secondCard.GetIsCovered();
 		ApplyAnimation(secondCard.GetUnCoveredImage(), secondCard.GetCoveredImage(), secondCard.GetIsCovered(), new SwapViewNoListener(secondCardUncoveredImage, secondCardCoveredImage, secondCardIsCovered));
-		secondCard.SetCoveredUncoveredState(true);
+		secondCard.SetCoveredState(true);
 	}
 
 	public void SetFirstCard(ImageView imageView) {

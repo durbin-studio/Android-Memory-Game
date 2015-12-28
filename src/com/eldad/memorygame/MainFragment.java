@@ -72,7 +72,7 @@ public class MainFragment extends Fragment implements IHaveSetup {
 				else
 					_engine.SetSecondCard(covered);
 				
-				gameCard.SetCoveredUncoveredState(false);
+				gameCard.SetCoveredState(false);
 				covered.setVisibility(View.VISIBLE);
 				uncovered.setVisibility(View.GONE);
 				
